@@ -1,21 +1,12 @@
 const express = require("express");
 const router = new express.Router();
-router.get("/", (req, res) => {
-  res.json("Hello World");
-});
+const movieController = require("../controllers/movieController");
+const articleController = require("../controllers/articleController");
+const userRoutes = require("./user");
+
+router.get("/", movieController.showMovies);
 //access URl params
 
-router.get("/articles/:title", (req, res) => {
-  try {
-    //attempt to run code, if no work we send to catch
-
-    res.json(req.params.title);
-  } catch (error) {}
-});
-
-router.post("/login", (req, res) => {
-  console.log(req.body);
-  const { username, password } = req.body;
-  res.json(`${username} is logged in`);
-});
+router.get("/articles/:title", articleController.getArticleByTitle);
+router.get("/pokemon", movieController.getAllPokemon);
 module.exports = router;
