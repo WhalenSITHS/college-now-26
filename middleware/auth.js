@@ -3,9 +3,8 @@ function trainerCheck(req, res, next) {
     next();
   } else {
     res.status(403).json({
-      error: "Only trainer Ash can access the pokemon list",
+      error: "you're not supposed to be here",
     });
   }
 }
-
 module.exports = trainerCheck;

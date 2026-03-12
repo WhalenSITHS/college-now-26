@@ -4,7 +4,7 @@ const movieController = require("../controllers/movieController");
 const articleController = require("../controllers/articleController");
 const userRoutes = require("./user");
 const shopController = require("../controllers/shopController");
-const trainerCheck = require("../middleware/auth");
+const auth = require("../middleware/auth");
 router.post("/save-shop", shopController.createShop);
 
 router.use("/users", userRoutes);
@@ -12,5 +12,5 @@ router.get("/", movieController.showMovies);
 //access URl params
 
 router.get("/articles/:title", articleController.getArticleByTitle);
-router.get("/pokemon", trainerCheck, movieController.getAllPokemon);
+router.get("/pokemon", auth, movieController.getAllPokemon);
 module.exports = router;
