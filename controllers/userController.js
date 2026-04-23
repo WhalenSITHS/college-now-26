@@ -92,6 +92,23 @@ exports.getProfile = async (req, res) => {
   }
 };
 
+exports.uploadProfilePicture = async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { photo: req.file.filename },
+      { new: true }
+    ).select("-password");
+
+    if (!user) return res.status(404).json({ error: "User not found" });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;

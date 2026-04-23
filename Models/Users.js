@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: "Please enter a password",
   },
+  photo: {
+    type: String,
+    default: "default.jpg",
+  },
 });
 
 userSchema.pre("save", async function () {
