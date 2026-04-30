@@ -68,6 +68,7 @@ exports.deleteUser = async (req, res) => {
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    console.log(req.body, name, email, password);
     const existing = await User.findOne({ email });
     if (existing)
       return res.status(400).json({ error: "Email already in use" });
@@ -99,7 +100,7 @@ exports.uploadProfilePicture = async (req, res) => {
     const user = await User.findByIdAndUpdate(
       req.user.id,
       { photo: req.file.filename },
-      { new: true }
+      { new: true },
     ).select("-password");
 
     if (!user) return res.status(404).json({ error: "User not found" });
